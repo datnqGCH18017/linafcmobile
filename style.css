@@ -1,0 +1,757 @@
+:root {
+    --brand: #5B4632;
+    --cream: #F4D9A0;
+    --amber: #CB792C;
+    --ink-on-amber: #2A1D10;
+    --bg: #FBF0D6;
+    --surface: #FFF9EA;
+    --ink: #3A2B1D;
+    --muted: #6F5A44;
+    --line: rgba(91, 70, 50, .28);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme:dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #2A1F15;
+        --surface: #3A2C1E;
+        --ink: #F7E8C6;
+        --muted: #D8C29A;
+        --line: rgba(244, 217, 160, .28);
+    }
+}
+
+:root[data-theme="dark"] {
+    --bg: #2A1F15;
+    --surface: #3A2C1E;
+    --ink: #F7E8C6;
+    --muted: #D8C29A;
+    --line: rgba(244, 217, 160, .28);
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    background: var(--bg);
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.display {
+    font-family: 'Baloo 2', 'Be Vietnam Pro', system-ui, sans-serif;
+    line-height: 1.1;
+    margin: 0;
+}
+
+a {
+    color: inherit
+}
+
+:focus-visible {
+    outline: 3px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 8px
+}
+
+/* Nút */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 48px;
+    padding: .7rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: transform .15s, box-shadow .15s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .22)
+}
+
+.btn-amber {
+    background: var(--amber);
+    color: var(--ink-on-amber)
+}
+
+.btn-line {
+    border-color: var(--cream);
+    color: var(--cream)
+}
+
+.btn-brand {
+    background: var(--brand);
+    color: var(--cream)
+}
+
+/* Hero */
+.hero {
+    background: radial-gradient(70% 60% at 50% 0%, rgba(203, 121, 44, .38), transparent 70%), var(--brand);
+    color: var(--cream);
+    text-align: center;
+    padding: 3.5rem 0 4rem;
+    border-radius: 0 0 2.5rem 2.5rem;
+}
+
+.avatar {
+    width: 176px;
+    height: 176px;
+    border-radius: 50%;
+    padding: 6px;
+    background: var(--amber);
+    margin: 0 auto 1.25rem;
+    box-shadow: 0 0 0 8px rgba(244, 217, 160, .18);
+}
+
+.avatar .slot {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 0;
+    background: var(--cream);
+    color: var(--brand);
+    overflow: hidden
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.name {
+    font-size: clamp(2.4rem, 8vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -.01em
+}
+
+.sub {
+    margin: .5rem auto 0;
+    max-width: 34rem;
+    color: #EBD3A0;
+    font-size: 1.05rem
+}
+
+/* Thẻ giờ live */
+.live {
+    margin: 1.75rem auto 0;
+    max-width: 26rem;
+    background: rgba(0, 0, 0, .22);
+    border: 1px solid rgba(244, 217, 160, .3);
+    border-radius: 1.25rem;
+    padding: 1rem 1.25rem;
+    text-align: left;
+}
+
+.live-top {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-weight: 600
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #8d7a60;
+    flex: none
+}
+
+.is-live .dot {
+    background: #ff5a3c;
+    animation: pulse 1.4s infinite
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 90, 60, .7)
+    }
+
+    100% {
+        box-shadow: 0 0 0 12px rgba(255, 90, 60, 0)
+    }
+}
+
+.track {
+    height: 8px;
+    border-radius: 99px;
+    background: rgba(244, 217, 160, .22);
+    margin: .8rem 0 .35rem;
+    overflow: hidden
+}
+
+.fill {
+    height: 100%;
+    width: 0;
+    background: var(--amber);
+    border-radius: 99px;
+    transition: width .6s
+}
+
+.ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: .82rem;
+    color: #D8C29A
+}
+
+/* Vào trang: một lượt duy nhất ở hero */
+.rise {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise .6s cubic-bezier(.2, .7, .2, 1) forwards
+}
+
+@keyframes rise {
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .rise {
+        animation: none;
+        opacity: 1;
+        transform: none
+    }
+
+    .is-live .dot {
+        animation: none
+    }
+
+    html {
+        scroll-behavior: auto
+    }
+}
+
+/* Khung ảnh chờ */
+.slot {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: .75rem;
+    border: 2px dashed var(--line);
+    border-radius: 1rem;
+    color: var(--muted);
+    font-size: .85rem;
+    background: rgba(203, 121, 44, .07)
+}
+
+.qr {
+    aspect-ratio: 1/1;
+    width: min(100%, 240px);
+    margin: 0 auto
+}
+
+.qr img,
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: inherit
+}
+
+/* Ủng hộ */
+.section {
+    padding: 4rem 0
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1.75rem;
+    padding: 1.5rem
+}
+
+.steps {
+    list-style: none;
+    margin: 1rem 0 1.25rem;
+    padding: 0;
+    display: grid;
+    gap: .75rem
+}
+
+.steps li {
+    display: flex;
+    gap: .75rem;
+    align-items: flex-start
+}
+
+.steps b {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--amber);
+    color: var(--ink-on-amber);
+    display: grid;
+    place-items: center;
+    font-size: .9rem
+}
+
+.acc {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.7rem;
+    letter-spacing: .04em;
+    word-break: break-all
+}
+
+.lbl {
+    color: var(--muted);
+    font-size: .9rem
+}
+
+/* YouTube */
+.yt {
+    background: var(--cream);
+    color: #3A2B1D
+}
+
+.yt .slot {
+    border-color: rgba(91, 70, 50, .4);
+    color: #5B4632;
+    background: rgba(203, 121, 44, .12)
+}
+
+.thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 16/9;
+    border-radius: 1rem;
+    overflow: hidden;
+    text-decoration: none
+}
+
+.thumb .slot {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit
+}
+
+.play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 58px;
+    height: 58px;
+    margin: -29px 0 0 -29px;
+    border-radius: 50%;
+    background: var(--amber);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .28);
+    transition: transform .15s
+}
+
+.thumb:hover .play {
+    transform: scale(1.1)
+}
+
+footer {
+    padding: 2rem 0 2.5rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: .9rem
+}
+
+/* ===== Hiệu ứng và nền có chiều sâu ===== */
+body {
+    overflow-x: clip
+}
+
+.hero {
+    background: radial-gradient(60% 50% at 50% 0%, rgba(203, 121, 44, .42), transparent 70%), radial-gradient(90% 70% at 50% 115%, rgba(0, 0, 0, .4), transparent 70%), linear-gradient(170deg, #6B523A, #5B4632 45%, #443322);
+    border-radius: 0;
+    padding: 3.5rem 0 7rem;
+    position: relative;
+    overflow: hidden
+}
+
+.bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none
+}
+
+.layer {
+    position: absolute;
+    will-change: transform
+}
+
+.orb {
+    display: block;
+    border-radius: 50%;
+    filter: blur(48px);
+    animation: drift 14s ease-in-out infinite alternate
+}
+
+.ball {
+    display: block;
+    color: var(--cream);
+    animation: bob 7s ease-in-out infinite
+}
+
+.stars {
+    position: absolute;
+    inset: 0
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--cream);
+    animation: tw 3s ease-in-out infinite
+}
+
+@keyframes drift {
+    to {
+        transform: translate(40px, 30px) scale(1.14)
+    }
+}
+
+@keyframes bob {
+    50% {
+        transform: translateY(-16px) rotate(10deg)
+    }
+}
+
+@keyframes tw {
+
+    0%,
+    100% {
+        opacity: .1
+    }
+
+    50% {
+        opacity: .9
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes halo {
+    0% {
+        transform: scale(1);
+        opacity: .5
+    }
+
+    100% {
+        transform: scale(1.35);
+        opacity: 0
+    }
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% 0
+    }
+}
+
+@keyframes cta {
+    0% {
+        box-shadow: 0 0 0 0 rgba(203, 121, 44, .65)
+    }
+
+    100% {
+        box-shadow: 0 0 0 16px rgba(203, 121, 44, 0)
+    }
+}
+
+@keyframes wave {
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+@keyframes mq {
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+@keyframes ping {
+    to {
+        transform: scale(1.9);
+        opacity: 0
+    }
+}
+
+@keyframes sweep {
+    to {
+        left: 130%
+    }
+}
+
+/* Avatar: vòng sáng quay và quầng sáng lan tỏa */
+.avatar {
+    position: relative;
+    box-shadow: none
+}
+
+.avatar::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0 50%, var(--cream) 85%, var(--amber));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+    animation: spin 4s linear infinite
+}
+
+.avatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid var(--amber);
+    animation: halo 2.4s ease-out infinite
+}
+
+/* Tên ánh kim */
+.shine {
+    background: linear-gradient(100deg, #F4D9A0 0%, #F4D9A0 38%, #fff8e4 46%, #E8A760 54%, #F4D9A0 62%, #F4D9A0 100%) 0 0/200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shine 5s linear infinite
+}
+
+/* Sóng chuyển cảnh */
+.wave {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 200%;
+    height: 56px;
+    fill: var(--bg);
+    animation: wave 12s linear infinite
+}
+
+.wave.w2 {
+    height: 78px;
+    opacity: .4;
+    animation-duration: 19s;
+    animation-direction: reverse
+}
+
+/* Dải chữ chạy */
+.marquee {
+    position: relative;
+    z-index: 3;
+    overflow: hidden;
+    margin: 1.6rem -3% 0;
+    padding: .7rem 0;
+    background: var(--amber);
+    color: var(--ink-on-amber);
+    font-weight: 600;
+    transform: rotate(-1.2deg);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .2)
+}
+
+.mq {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    width: max-content;
+    animation: mq 32s linear infinite
+}
+
+.mq span {
+    white-space: nowrap
+}
+
+.mq i {
+    font-style: normal
+}
+
+/* Nút */
+.btn {
+    position: relative;
+    overflow: hidden
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -70%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .4), transparent);
+    transform: skewX(-20deg);
+    pointer-events: none
+}
+
+.btn:hover::after {
+    animation: sweep .7s
+}
+
+.btn-line:hover {
+    background: rgba(244, 217, 160, .14)
+}
+
+.pulse {
+    animation: cta 2.4s ease-out infinite
+}
+
+/* Thẻ: nghiêng 3D và đèn rọi theo chuột */
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s
+}
+
+.card:hover {
+    box-shadow: 0 22px 40px rgba(0, 0, 0, .22)
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+    background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 50%), rgba(203, 121, 44, .24), transparent 70%)
+}
+
+.card:hover::after {
+    opacity: 1
+}
+
+.thumb {
+    transition: transform .3s, box-shadow .3s
+}
+
+.thumb:hover {
+    transform: translateY(-6px) rotate(-.6deg);
+    box-shadow: 0 18px 30px rgba(58, 43, 29, .3)
+}
+
+.play::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--amber);
+    animation: ping 2s ease-out infinite
+}
+
+/* Nền có chiều sâu cho các phần bên dưới */
+#donate,
+.yt {
+    position: relative;
+    overflow: hidden
+}
+
+#donate::before,
+.yt::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: drift 16s ease-in-out infinite alternate
+}
+
+#donate::before {
+    width: 460px;
+    height: 460px;
+    right: -140px;
+    top: 6%;
+    background: radial-gradient(circle, rgba(203, 121, 44, .3), transparent 70%)
+}
+
+#donate::after {
+    content: '';
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    left: -120px;
+    bottom: -60px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(203, 121, 44, .2), transparent 70%);
+    animation: drift 20s ease-in-out infinite alternate-reverse
+}
+
+.yt::before {
+    width: 340px;
+    height: 340px;
+    left: -90px;
+    top: -90px;
+    background: radial-gradient(circle, rgba(203, 121, 44, .34), transparent 70%)
+}
+
+#donate>div,
+.yt>div {
+    position: relative;
+    z-index: 1
+}
+
+/* Hiện dần khi cuộn tới */
+.rv {
+    opacity: 0;
+    transform: translateY(28px) scale(.98);
+    transition: opacity .7s, transform .7s cubic-bezier(.2, .7, .2, 1);
+    transition-delay: calc(var(--i, 0)*120ms)
+}
+
+.rv.in {
+    opacity: 1;
+    transform: none
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    .orb,
+    .ball,
+    .shine,
+    .avatar::before,
+    .avatar::after,
+    .wave,
+    .mq,
+    .pulse,
+    .play::before,
+    #donate::before,
+    #donate::after,
+    .yt::before,
+    .star {
+        animation: none !important
+    }
+
+    .rv {
+        opacity: 1;
+        transform: none;
+        transition: none
+    }
+}
